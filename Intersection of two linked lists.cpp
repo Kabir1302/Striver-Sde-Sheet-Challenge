@@ -1,3 +1,4 @@
+#include<bits/stdc++.h>
 /****************************************************************
 
     Following is the class structure of the Node class:
@@ -29,17 +30,21 @@
 Node* findIntersection(Node *firstHead, Node *secondHead)
 {
     //Write your code here
-    while(secondHead != NULL)
+    Node* first=firstHead;
+    Node* second=secondHead;
+    unordered_set<Node*>s1;
+    while(first)
     {
-        Node* temp=firstHead;
-        while(temp != NULL)
-        {
-            if(temp==secondHead)
-               return secondHead;
-
-            temp=temp->next;
-        }
-        secondHead=secondHead->next;
+        s1.insert(first);
+        first=first->next;
     }
-    return nullptr;
+    while(second)
+    {
+        if(s1.find(second)!=s1.end())
+        {
+            return second;
+        }
+        second=second->next;
+    }
+    return NULL;
 }
